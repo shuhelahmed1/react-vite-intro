@@ -7,19 +7,29 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './component/Home/Home.jsx';
+import About from './component/About/About.jsx';
+import Contact from './component/Contact/Contact.jsx';
+import Users from './component/Users/Users.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home></Home>
-  },
-  {
-    path: '/about',
-    element: <h1>You are in about page</h1>
-  }, 
-  {
-    path: 'contact',
-    element: <h1>You are in contact page</h1>
+    element: <Home></Home>,
+    children: [
+      {
+        path: 'about',
+        element: <About></About>
+      },
+      {
+        path: 'contact',
+        element: <Contact></Contact>
+      },
+      {
+        path: 'users',
+        loader: ()=> fetch('https://jsonplaceholder.typicode.com/users'),
+        element: <Users></Users>
+      }
+    ]
   }
 ])
 
